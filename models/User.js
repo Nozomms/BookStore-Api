@@ -46,8 +46,7 @@ function validateRegisterUser(obj) {
       Joi.string().trim().min(2).max(200).required(),
     password:
       Joi.string().trim().min(6).required(),
-    isAdmin:
-      Joi.boolean(),
+  
   });
   return schema.validate(obj);
 }
