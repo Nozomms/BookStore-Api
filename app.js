@@ -21,8 +21,6 @@ const app = express();
 app.use(express.json());
 app.use(logger);
 
-k;;k
-
 //Routes 
 app.get('/', (req, res) => {
   res.send("WELCOME IN BOOKstore API  ")
