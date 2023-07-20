@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-
+const jwt = require('jsonwebtoken');
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -33,6 +33,11 @@ const UserSchema = new mongoose.Schema({
   {
     timestamps: true
   })
+
+  //Generate Token 
+  UserSchema.methods.generateToken = function (){
+    return jwt.sign({ id: this._id, isAdmin: this.isAdmin }, process.env.JWT_SECRET_KEY);
+  }
 
 //User Model
 const User = mongoose.model("User", UserSchema);
@@ -77,5 +82,5 @@ module.exports = {
   User,
   validateLoginUser,
   validateRegisterUser,
-  validateUpdateUser
+  validateUpdateUser,
 }
