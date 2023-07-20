@@ -43,7 +43,7 @@ router.get("/:id", asyncHandler(
  * @des Create new author
  * @route /api/authors
  * @method POST
- * @access public
+ * @access private only admin
  */
 router.post("/", verifyTokenAndAdmin,
  asyncHandler(async (req, res) => {
@@ -70,7 +70,7 @@ router.post("/", verifyTokenAndAdmin,
  * @des Update an author
  * @route /api/authors/:id
  * @method PUT
- * @access public
+ * @access private (only admin)
  */
 router.put("/:id",
 verifyTokenAndAdmin,
@@ -96,7 +96,7 @@ verifyTokenAndAdmin,
  * @des delete an author
  * @route /api/authors/:id
  * @method PUT
- * @access public
+ * @access private (only admin)
  */
 router.delete("/:id", verifyTokenAndAdmin,
  asyncHandler(async (req, res) => {

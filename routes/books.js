@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const asyncHandler = require('express-async-handler')
+const {verifyTokenAndAdmin,verifyTokenAndAuthorization}= require('../middlewares/verifyToken')
 const { Book, valdiateCreateBook, valdiateUpdateBook } = require('../models/Book')
 
 // const books = [
@@ -83,9 +84,10 @@ router.get("/:id", asyncHandler(
  * @des Create new book
  * @route /api/books
  * @method POST
- * @access public
+ * @access private only admin
  */
 router.post("/",
+  verifyTokenAndAdmin,
   asyncHandler(async (req, res) => {
 
     const { error } = valdiateCreateBook(req.body)
@@ -112,9 +114,11 @@ router.post("/",
  * @des Update a book
  * @route /api/books/:id
  * @method PUT
- * @access public
+ * @access private only admin
  */
-router.put("/:id", asyncHandler(async (req, res) => {
+router.put("/:id",
+verifyTokenAndAdmin,
+ asyncHandler(async (req, res) => {
   const { error } = valdiateUpdateBook(req.body);
   if (error) {
     return res.status(400).json({ message: error.details[0].message })
@@ -137,9 +141,11 @@ router.put("/:id", asyncHandler(async (req, res) => {
  * @des Delet a book
  * @route /api/books/:id
  * @method DELET
- * @access public
+ * @access private only admin
  */
-router.delete("/:id", asyncHandler(async (req, res) => {
+router.delete("/:id",
+verifyTokenAndAdmin,
+ asyncHandler(async (req, res) => {
 
   const book = Book.findById(req.params.id)
   if (book) {

@@ -4,16 +4,13 @@ const authorsPath = require("./routes/authors");
 const usersPath = require("./routes/users");
 const authPath = require("./routes/auth");
 const logger = require('./middlewares/logger')
-const mongoose = require("mongoose");
+const connectToDB =require('./config/db')
 const dotenv = require("dotenv");
 const { notFound, errHandler } = require("./middlewares/errors");
 dotenv.config()
 
 //connection to Database
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected To MongoDB..."))
-  .catch((error) => console.log("Connection Failed To MongoDB!", error))
+connectToDB();
 //init App
 const app = express();
 
