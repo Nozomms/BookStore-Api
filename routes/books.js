@@ -60,7 +60,16 @@ const { Book, valdiateCreateBook, valdiateUpdateBook } = require('../models/Book
  */
 router.get("/", asyncHandler(
   async (req, res) => {
-    const bookList = await Book.find();
+    // Comparioson Query Operators
+    // $eq (equal)
+    // $ne (not equal)
+    // $lt (less than)
+    // $lte (less than and equal)
+    const bookList = await Book.find({price:{$gt: 10}}).populate("author",[
+      "_id",
+      "firstName",
+      "lastName"
+    ])
     res.status(200).json(bookList);
   }))
 
