@@ -58,20 +58,33 @@ const { Book, valdiateCreateBook, valdiateUpdateBook } = require('../models/Book
  * @method GET
  * @access public
  */
+// Comparioson Query Operators
+// $eq (equal)
+// $ne (not equal)
+// $lt (less than)
+// $lte (less than and equal)
 router.get("/", asyncHandler(
   async (req, res) => {
-    // Comparioson Query Operators
-    // $eq (equal)
-    // $ne (not equal)
-    // $lt (less than)
-    // $lte (less than and equal)
-    const bookList = await Book.find({price:{$gt: 10}}).populate("author",[
-      "_id",
-      "firstName",
-      "lastName"
-    ])
+
+    const {minPrice, maxPrice} = req.query;
+    let bookList; 
+    if(minPrice&&maxPrice){
+      bookList = await Book.find({price:{$gte:minPrice , $lte:maxPrice}}).populate("author",[
+        "_id",
+        "firstName",
+        "lastName"
+      ]);
+    } else {
+      bookList = await Book.find().populate("author",[
+        "_id",
+        "firstName",
+        "lastName"
+      ]);
+    }
+  
     res.status(200).json(bookList);
-  }))
+    }))
+      
 
 /**
  * @des Get books by id

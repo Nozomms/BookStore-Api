@@ -38,7 +38,7 @@ const books = [
       title: "The Flea Palace",
       author: "64b6b3b6cf55d1683f19736c",
       description: "About The Flea Palace",
-      price: 10,
+      price: 100,
       cover: "hard cover",
     },
   ];
