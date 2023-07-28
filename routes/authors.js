@@ -17,6 +17,7 @@ const { Author, validateCreateAuthor, validateUpdateAuthor } = require("../model
  */
 router.get("/", asyncHandler(
   async (req, res) => {
+    const {pageNumber} = req.query;
     const authorList = await Author.find();
     res.status(200).json(authorList);
   }))
