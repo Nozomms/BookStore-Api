@@ -13,6 +13,7 @@ const app = express();
 // Apply Middlewares
 app.use(express.json());
 app.use(logger);
+app.set('view engine','ejs')
 
 //Routes 
 app.get('/', (req, res) => {
@@ -22,6 +23,7 @@ app.use("/api/books", require("./routes/books"))
 app.use("/api/authors", require("./routes/authors"))
 app.use("/api/auth", require("./routes/auth"))
 app.use("/api/users", require("./routes/users"))
+app.use("/password",require('./routes/password'));
 
 // Error Handling
 app.use(notFound);
