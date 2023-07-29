@@ -3,6 +3,7 @@ const logger = require('./middlewares/logger')
 const connectToDB =require('./config/db')
 require("dotenv").config();
 const { notFound, errHandler } = require("./middlewares/errors");
+const { setRandomFallback } = require("bcryptjs");
 
 //connection to Database
 connectToDB();
@@ -12,6 +13,7 @@ const app = express();
 
 // Apply Middlewares
 app.use(express.json());
+app.use(express.urlencoded({extended: false}))
 app.use(logger);
 app.set('view engine','ejs')
 
