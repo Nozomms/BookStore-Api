@@ -5,7 +5,7 @@ const { verifyTokenAndAdmin, verifyTokenAndAuthorization } = require('../middlew
 
 router.get("/", getAllBooks)
 
-router.get("/:id", getBookById)
+router.get("/:id", getBookById);
 
 router.post("/", verifyTokenAndAdmin, createNewBook)
 
